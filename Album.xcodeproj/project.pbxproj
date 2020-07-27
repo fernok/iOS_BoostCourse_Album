@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B342847224CC547C00BA5015 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */; };
 		B3A781F524CEC6D10089EE9F /* IndividualImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */; };
+		B3A781F724CF083C0089EE9F /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A781F624CF083C0089EE9F /* GlobalMethods.swift */; };
 		B3C3A96B24C3382A00CECD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96A24C3382A00CECD06 /* AppDelegate.swift */; };
 		B3C3A96D24C3382A00CECD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96C24C3382A00CECD06 /* SceneDelegate.swift */; };
 		B3C3A96F24C3382A00CECD06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96E24C3382A00CECD06 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
 		B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualImageViewController.swift; sourceTree = "<group>"; };
+		B3A781F624CF083C0089EE9F /* GlobalMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
 		B3C3A96724C3382A00CECD06 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3C3A96A24C3382A00CECD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3C3A96C24C3382A00CECD06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				B3C94BAB24CC090B001BFE63 /* AlbumCollectionViewController.swift */,
 				B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */,
 				B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */,
+				B3A781F624CF083C0089EE9F /* GlobalMethods.swift */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A781F724CF083C0089EE9F /* GlobalMethods.swift in Sources */,
 				B3C94BAC24CC090B001BFE63 /* AlbumCollectionViewController.swift in Sources */,
 				B3C3A96F24C3382A00CECD06 /* ViewController.swift in Sources */,
 				B3C3A99D24C33F2600CECD06 /* PhotosViewController.swift in Sources */,

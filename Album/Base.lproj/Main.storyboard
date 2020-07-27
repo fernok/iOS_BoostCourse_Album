@@ -220,11 +220,19 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQI-Ey-3BU">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="0ds-Yr-Q8C"/>
+                                    <barButtonItem systemItem="action" id="0ds-Yr-Q8C">
+                                        <connections>
+                                            <action selector="touchUpShareButton:" destination="OCR-K7-g51" id="uaD-TQ-j7M"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="hQu-hW-451"/>
                                     <barButtonItem title="Item" id="cjy-t6-fgH"/>
                                     <barButtonItem systemItem="flexibleSpace" id="Xgo-Dz-BcD"/>
-                                    <barButtonItem title="Item" systemItem="trash" id="sO4-ez-rYA"/>
+                                    <barButtonItem title="Item" systemItem="trash" id="sO4-ez-rYA">
+                                        <connections>
+                                            <action selector="touchUpTrashButton:" destination="OCR-K7-g51" id="ese-ct-O32"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

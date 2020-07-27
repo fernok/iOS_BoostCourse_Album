@@ -74,7 +74,14 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     @IBAction func touchUpSelectButton(_ sender: UIBarButtonItem) {
-        
+        if sender.title == "선택" {
+            sender.title = "취소"
+            self.navigationItem.title = "항목 선택"
+        }
+        else {
+            sender.title = "선택"
+            self.navigationItem.title = self.assetCollection.localizedTitle
+        }
     }
 
     // MARK:- Override Functions
