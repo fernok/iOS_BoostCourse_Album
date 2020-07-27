@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B342847224CC547C00BA5015 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */; };
+		B3A781F524CEC6D10089EE9F /* IndividualImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */; };
 		B3C3A96B24C3382A00CECD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96A24C3382A00CECD06 /* AppDelegate.swift */; };
 		B3C3A96D24C3382A00CECD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96C24C3382A00CECD06 /* SceneDelegate.swift */; };
 		B3C3A96F24C3382A00CECD06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3A96E24C3382A00CECD06 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
+		B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualImageViewController.swift; sourceTree = "<group>"; };
 		B3C3A96724C3382A00CECD06 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3C3A96A24C3382A00CECD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3C3A96C24C3382A00CECD06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				B3E723C224C56F20000474A3 /* Friends.swift */,
 				B3C94BAB24CC090B001BFE63 /* AlbumCollectionViewController.swift */,
 				B342847124CC547C00BA5015 /* ImageCollectionViewController.swift */,
+				B3A781F424CEC6D10089EE9F /* IndividualImageViewController.swift */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				B3E723C324C56F20000474A3 /* Friends.swift in Sources */,
 				B3E723C124C56E98000474A3 /* CollectionViewCell.swift in Sources */,
 				B3E723BF24C55742000474A3 /* CollectionViewController.swift in Sources */,
+				B3A781F524CEC6D10089EE9F /* IndividualImageViewController.swift in Sources */,
 				B3C3A96D24C3382A00CECD06 /* SceneDelegate.swift in Sources */,
 				B3CCD77424C3EB01007B995C /* AsyncViewController.swift in Sources */,
 			);

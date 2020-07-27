@@ -20,3 +20,8 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     @IBOutlet var albumTitleLabel: UILabel!
     @IBOutlet var albumNumberLabel: UILabel!
 }
+
+
+class ImageCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var imageView: UIImageView!
+}

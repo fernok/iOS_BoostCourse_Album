@@ -15,7 +15,7 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
     var albumFetchResult: PHFetchResult<PHAssetCollection>!
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     let cellIdentifier: String = "albumCell"
-    
+    let halfWidth: CGFloat = UIScreen.main.bounds.width / 3.0
     
     // MARK:- Collection View Customization
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -23,7 +23,9 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
+        guard let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as? AlbumCollectionViewCell else {
+            fatalError("Wrong class cell dequeued")
+        }
         
         cell.albumTitleLabel.text = albumFetchResult[indexPath.item].localizedTitle
         cell.albumNumberLabel.text = String(albumFetchResult[indexPath.item].estimatedAssetCount)
@@ -32,7 +34,7 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         let albumCoverImageFetchResult: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: albumAssetCollection, options: nil)
         let albumCoverImageAsset: PHAsset = albumCoverImageFetchResult.object(at: 0)
         
-        imageManager.requestImage(for: albumCoverImageAsset, targetSize: CGSize(width: 30, height: 30), contentMode: .aspectFill, options: nil, resultHandler: { image, _ in cell.albumCoverImage?.image = image})
+        imageManager.requestImage(for: albumCoverImageAsset, targetSize: CGSize(width: halfWidth, height: halfWidth), contentMode: .aspectFill, options: nil, resultHandler: { image, _ in cell.albumCoverImage?.image = image})
         
         return cell
     }
@@ -100,10 +102,8 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.minimumInteritemSpacing = 10
-        
-        let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
+        flowLayout.minimumLineSpacing = 5
+        flowLayout.minimumInteritemSpacing = 0
         
         flowLayout.estimatedItemSize = CGSize(width: halfWidth, height: halfWidth)
         
@@ -117,7 +117,9 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.collectionView.reloadSections(IndexSet(0...0))
+        OperationQueue.main.addOperation {
+            self.collectionView.reloadSections(IndexSet(0...0))
+        }
     }
     
 
@@ -145,6 +147,8 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         }
         
         nextViewController.assetCollection = self.albumFetchResult[index.item]
+        
+        nextViewController.navigationItem.title = albumFetchResult[index.item].localizedTitle
         
     }
 
