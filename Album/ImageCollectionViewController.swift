@@ -13,7 +13,9 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var selectButtonItem: UIBarButtonItem!
-    @IBOutlet var barButtonItem: UIBarButtonItem!
+    @IBOutlet var orderButtonItem: UIBarButtonItem!
+    @IBOutlet var shareButtonItem: UIBarButtonItem!
+    @IBOutlet var trashButtonItem: UIBarButtonItem!
     var assetCollection: PHAssetCollection!
     var fetchResult: PHFetchResult<PHAsset>!
     let imageManager: PHCachingImageManager = PHCachingImageManager()
@@ -58,6 +60,8 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         self.fetchResult = PHAsset.fetchAssets(in: assetCollection, options: fetchOptions)
     }
     
+    
+    // MARK:- Touch Up Methods
     @IBAction func changeOrderOfAssets(_ sender: UIBarButtonItem) {
         if sender.title == "최신순" {
             sender.title = "과거순"
@@ -77,11 +81,21 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         if sender.title == "선택" {
             sender.title = "취소"
             self.navigationItem.title = "항목 선택"
+            self.orderButtonItem.isEnabled = false
+            self.shareButtonItem.isEnabled = true
+            self.trashButtonItem.isEnabled = true
         }
         else {
             sender.title = "선택"
             self.navigationItem.title = self.assetCollection.localizedTitle
+            self.orderButtonItem.isEnabled = true
+            self.shareButtonItem.isEnabled = false
+            self.trashButtonItem.isEnabled = false
         }
+    }
+    
+    @IBAction func touchUpShareButton(_ sender: UIBarButtonItem) {
+//        shareImage(viewController: self, assetSet: <#T##[PHAsset]#>, imageManager: imageManager)
     }
 
     // MARK:- Override Functions

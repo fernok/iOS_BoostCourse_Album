@@ -156,6 +156,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnK-Z9-qiP">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem enabled="NO" systemItem="action" id="mIj-La-Ftm">
+                                        <connections>
+                                            <action selector="touchUpShareButton:" destination="z3S-vT-BHP" id="bTO-WT-fcs"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="32K-Xg-Odi">
                                         <connections>
                                             <action selector="changeOrderOfAssets:" destination="z3S-vT-BHP" id="JVQ-by-3Iu"/>
@@ -171,6 +176,7 @@
                                             <action selector="changeOrderOfAssets:" destination="z3S-vT-BHP" id="xTo-Ui-Fyk"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem enabled="NO" systemItem="trash" id="SW8-S5-S5i"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -194,9 +200,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="barButtonItem" destination="Ijf-Yg-W1p" id="sZr-ag-eUo"/>
                         <outlet property="collectionView" destination="W7u-HM-KsB" id="ZEn-aZ-8Nq"/>
+                        <outlet property="orderButtonItem" destination="Ijf-Yg-W1p" id="sZr-ag-eUo"/>
                         <outlet property="selectButtonItem" destination="Pex-9B-hhh" id="ZCe-Cc-oxw"/>
+                        <outlet property="shareButtonItem" destination="mIj-La-Ftm" id="ZLS-v4-7QT"/>
+                        <outlet property="trashButtonItem" destination="SW8-S5-S5i" id="Yh4-pz-IKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eud-VT-Klb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -211,12 +219,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKM-0j-7Qw">
-                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="EtW-CB-Yoz">
+                                <rect key="frame" x="0.0" y="44" width="375" height="579"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKM-0j-7Qw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="FKM-0j-7Qw" secondAttribute="height" multiplier="1:1" id="rfH-Zc-6wX"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="top" secondItem="e0c-o7-fVo" secondAttribute="top" id="FVy-1y-ffx"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="height" secondItem="EtW-CB-Yoz" secondAttribute="height" id="I3M-Gt-sgO"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="bottom" secondItem="e0c-o7-fVo" secondAttribute="bottom" constant="579" id="SNr-BX-qf2"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="trailing" secondItem="e0c-o7-fVo" secondAttribute="trailing" constant="375" id="iLc-M5-oQo"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="leading" secondItem="e0c-o7-fVo" secondAttribute="leading" id="kuj-a3-2dA"/>
+                                    <constraint firstItem="FKM-0j-7Qw" firstAttribute="width" secondItem="EtW-CB-Yoz" secondAttribute="width" id="wia-Cf-myF"/>
                                 </constraints>
-                            </imageView>
+                                <viewLayoutGuide key="contentLayoutGuide" id="e0c-o7-fVo"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Vxu-1Q-E7j"/>
+                                <connections>
+                                    <outlet property="delegate" destination="OCR-K7-g51" id="dMp-C0-5Y7"/>
+                                </connections>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQI-Ey-3BU">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
@@ -238,12 +261,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="bottom" secondItem="wmb-5L-oae" secondAttribute="bottom" id="Gv4-tG-2k5"/>
-                            <constraint firstItem="FKM-0j-7Qw" firstAttribute="leading" secondItem="wmb-5L-oae" secondAttribute="leading" id="JoS-Qd-rgw"/>
-                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="trailing" secondItem="wmb-5L-oae" secondAttribute="trailing" id="NV2-qo-smo"/>
-                            <constraint firstItem="FKM-0j-7Qw" firstAttribute="centerY" secondItem="VnO-JD-oxu" secondAttribute="centerY" id="TNB-4v-rPP"/>
-                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="leading" secondItem="wmb-5L-oae" secondAttribute="leading" id="ZO3-Uz-lNd"/>
-                            <constraint firstItem="wmb-5L-oae" firstAttribute="trailing" secondItem="FKM-0j-7Qw" secondAttribute="trailing" id="pRb-ng-8Dn"/>
+                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="top" secondItem="EtW-CB-Yoz" secondAttribute="bottom" id="2kG-SC-Vq1"/>
+                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="trailing" secondItem="wmb-5L-oae" secondAttribute="trailing" id="BuP-eP-e8F"/>
+                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="bottom" secondItem="wmb-5L-oae" secondAttribute="bottom" id="NoI-zk-Gh3"/>
+                            <constraint firstItem="EtW-CB-Yoz" firstAttribute="leading" secondItem="wmb-5L-oae" secondAttribute="leading" id="Ob9-Os-fL4"/>
+                            <constraint firstItem="ZQI-Ey-3BU" firstAttribute="leading" secondItem="wmb-5L-oae" secondAttribute="leading" id="XjE-II-dae"/>
+                            <constraint firstItem="EtW-CB-Yoz" firstAttribute="trailing" secondItem="wmb-5L-oae" secondAttribute="trailing" id="y11-IN-ivE"/>
+                            <constraint firstItem="EtW-CB-Yoz" firstAttribute="top" secondItem="wmb-5L-oae" secondAttribute="top" id="yK2-1e-5Ly"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wmb-5L-oae"/>
                     </view>
@@ -257,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hM1-wa-ff3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2602" y="-527"/>
+            <point key="canvasLocation" x="2600.8000000000002" y="-527.58620689655174"/>
         </scene>
         <!--사진들-->
         <scene sceneID="tne-QT-ifu">

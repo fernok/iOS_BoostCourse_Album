@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class IndividualImageViewController: UIViewController {
+class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var shareButton: UIBarButtonItem!
@@ -28,10 +28,14 @@ class IndividualImageViewController: UIViewController {
         return formatter
     }()
     
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+    
     // MARK:- Touch Up Methods
     @IBAction func touchUpShareButton(_ sender: UIBarButtonItem) {
 //        shareImage(viewController: self, asset: asset)
-        shareImage(viewController: self, asset: asset, imageManager: imageManager)
+        shareImage(viewController: self, assetSet: [asset], imageManager: imageManager)
     }
     
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {

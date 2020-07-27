@@ -10,13 +10,15 @@ import Foundation
 import Photos
 import UIKit
 
-func shareImage(viewController: UIViewController, asset: PHAsset, imageManager: PHCachingImageManager) {
-    var assetImage: UIImage = UIImage()
-    imageManager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: nil, resultHandler: {
-        image, _ in
-        assetImage = image!
-    })
-    let imageToShare: [UIImage] = [assetImage]
+func shareImage(viewController: UIViewController, assetSet: [PHAsset], imageManager: PHCachingImageManager) {
+    var imageToShare: [UIImage] = []
+    for individualImage in assetSet {
+        imageManager.requestImage(for: individualImage, targetSize: CGSize(width: individualImage.pixelWidth, height: individualImage.pixelHeight), contentMode: .aspectFit, options: nil, resultHandler: {
+            image, _ in
+            imageToShare.append(image!)
+        })
+    }
+    
     let activityView: UIActivityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
     
     viewController.present(activityView, animated: true, completion: nil)
