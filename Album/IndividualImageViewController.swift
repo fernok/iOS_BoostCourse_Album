@@ -39,17 +39,7 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
-        let assetToDelete: PHAsset = self.asset
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.deleteAssets([assetToDelete] as NSFastEnumeration)
-        }, completionHandler: {
-            didDeleteAsset, _ in
-            if didDeleteAsset {
-                OperationQueue.main.addOperation {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
-        })
+        deleteImage(viewController: self, assetSet: [self.asset])
     }
     
     // MARK:- Set Title and Subtitle
@@ -95,7 +85,9 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         
         imageManager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: nil, resultHandler: {
             image, _ in
-            self.imageView.image = image
+            OperationQueue.main.addOperation {
+                self.imageView.image = image
+            }
         })
         
 //        self.navigationItem.title = asset.creationDate.

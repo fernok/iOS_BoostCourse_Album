@@ -23,3 +23,16 @@ func shareImage(viewController: UIViewController, assetSet: [PHAsset], imageMana
     
     viewController.present(activityView, animated: true, completion: nil)
 }
+
+func deleteImage(viewController: UIViewController, assetSet: [PHAsset]){
+    PHPhotoLibrary.shared().performChanges({
+        PHAssetChangeRequest.deleteAssets(assetSet as NSFastEnumeration)
+    }, completionHandler: {
+        didDeleteAsset, _ in
+        if didDeleteAsset {
+            OperationQueue.main.addOperation {
+                viewController.navigationController?.popViewController(animated: true)
+            }
+        }
+    })
+}

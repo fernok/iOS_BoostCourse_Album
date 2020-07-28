@@ -18,6 +18,9 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet var trashButtonItem: UIBarButtonItem!
     var assetCollection: PHAssetCollection!
     var fetchResult: PHFetchResult<PHAsset>!
+    var selectedAssets: [PHAsset] = []
+    var selectedCells: NSMutableArray = []
+    var isCellsSelectable: Bool = false
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     let cellIdentifier: String = "singleImageCell"
     let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
@@ -44,10 +47,6 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         guard let changes = changeInstance.changeDetails(for: fetchResult) else { return }
         
         fetchResult = changes.fetchResultAfterChanges
-        
-//        if fetchResult.count == 0 {
-//            self.navigationController?.popViewController(animated: true)
-//        }
         
         OperationQueue.main.addOperation {
             self.collectionView.reloadSections(IndexSet(0...0))
@@ -78,24 +77,31 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     @IBAction func touchUpSelectButton(_ sender: UIBarButtonItem) {
-        if sender.title == "선택" {
-            sender.title = "취소"
+        // select button pressed
+        if !isCellsSelectable {
             self.navigationItem.title = "항목 선택"
-            self.orderButtonItem.isEnabled = false
-            self.shareButtonItem.isEnabled = true
-            self.trashButtonItem.isEnabled = true
-        }
-        else {
-            sender.title = "선택"
-            self.navigationItem.title = self.assetCollection.localizedTitle
-            self.orderButtonItem.isEnabled = true
             self.shareButtonItem.isEnabled = false
             self.trashButtonItem.isEnabled = false
+            self.selectButtonItem.title = "취소"
+            isCellsSelectable = true
+        }
+        // cancel button pressed
+        else {
+            self.navigationItem.title = self.assetCollection.localizedTitle
+            self.shareButtonItem.isEnabled = false
+            self.trashButtonItem.isEnabled = false
+            self.selectButtonItem.title = "선택"
+            self.selectedCells.removeAllObjects()
+            isCellsSelectable = false
         }
     }
     
     @IBAction func touchUpShareButton(_ sender: UIBarButtonItem) {
-//        shareImage(viewController: self, assetSet: <#T##[PHAsset]#>, imageManager: imageManager)
+        shareImage(viewController: self, assetSet: selectedAssets, imageManager: imageManager)
+    }
+    
+    @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
+        deleteImage(viewController: self, assetSet: selectedAssets)
     }
 
     // MARK:- Override Functions

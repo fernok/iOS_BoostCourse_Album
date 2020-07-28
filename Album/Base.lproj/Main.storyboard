@@ -176,7 +176,11 @@
                                             <action selector="changeOrderOfAssets:" destination="z3S-vT-BHP" id="xTo-Ui-Fyk"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem enabled="NO" systemItem="trash" id="SW8-S5-S5i"/>
+                                    <barButtonItem enabled="NO" systemItem="trash" id="SW8-S5-S5i">
+                                        <connections>
+                                            <action selector="touchUpTrashButton:" destination="z3S-vT-BHP" id="Iog-Nd-MY1"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -242,6 +246,9 @@
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQI-Ey-3BU">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZQI-Ey-3BU" secondAttribute="height" multiplier="375:44" id="R3W-Nh-CJy"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem systemItem="action" id="0ds-Yr-Q8C">
                                         <connections>
