@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class ImageCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, PHPhotoLibraryChangeObserver {
+class ImageCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PHPhotoLibraryChangeObserver {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var selectButtonItem: UIBarButtonItem!
@@ -35,11 +35,38 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
             fatalError("Wrong class cell dequeued")
         }
         
+        cell.isSelected = false
+        
         let asset: PHAsset = fetchResult.object(at: indexPath.item)
         
         imageManager.requestImage(for: asset, targetSize: CGSize(width: halfWidth, height: halfWidth), contentMode: .aspectFill, options: nil, resultHandler: { image, _ in cell.imageView?.image = image })
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell: ImageCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else {
+            fatalError("Wrong class cell dequeued")
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        //
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat = collectionView.frame.width / 2.0
+        
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 
     // MARK:- Photos Methods
@@ -112,16 +139,16 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         PHPhotoLibrary.shared().register(self)
         
-        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumLineSpacing = 5
-        flowLayout.minimumInteritemSpacing = 0
-        
-//        let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
-        
-        flowLayout.estimatedItemSize = CGSize(width: halfWidth, height: halfWidth)
-        
-        self.collectionView.collectionViewLayout = flowLayout
+//        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        flowLayout.sectionInset = UIEdgeInsets.zero
+//        flowLayout.minimumLineSpacing = 5
+//        flowLayout.minimumInteritemSpacing = 0
+//
+////        let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
+//
+//        flowLayout.estimatedItemSize = CGSize(width: halfWidth, height: halfWidth)
+//
+//        self.collectionView.collectionViewLayout = flowLayout
         
         self.collectionView.reloadData()
 

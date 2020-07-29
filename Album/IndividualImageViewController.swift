@@ -10,12 +10,14 @@ import UIKit
 import Photos
 
 class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
-    
+    @IBOutlet weak var tempButton: UIBarButtonItem!
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var shareButton: UIBarButtonItem!
     @IBOutlet var likeButton: UIBarButtonItem!
     @IBOutlet var trashButton: UIBarButtonItem!
     var asset: PHAsset!
+    var assetIsFavorite: Bool!
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
@@ -32,6 +34,29 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         return self.imageView
     }
     
+    func toggleFavoriteForAsset(asset: PHAsset!) {
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetChangeRequest(for: asset)
+            if asset.isFavorite {
+                request.isFavorite = false
+            }
+            else {
+                request.isFavorite = true
+            }
+//            request.isFavorite = !asset.isFavorite
+//            request.isFavorite = asset.isFavorite ? false : true
+        }, completionHandler: nil)
+    }
+    
+    func checkIfAssetIsFavorite() {
+        if self.assetIsFavorite {
+            self.likeButton.image = UIImage(systemName: "heart.fill")
+        }
+        else {
+            self.likeButton.image = UIImage(systemName: "heart")
+        }
+    }
+    
     // MARK:- Touch Up Methods
     @IBAction func touchUpShareButton(_ sender: UIBarButtonItem) {
 //        shareImage(viewController: self, asset: asset)
@@ -40,6 +65,21 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
         deleteImage(viewController: self, assetSet: [self.asset])
+    }
+    
+    @IBAction func touchUpFavoriteButton(_ sender: UIBarButtonItem) {
+        self.assetIsFavorite = !self.assetIsFavorite
+        
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetChangeRequest(for: self.asset)
+            request.isFavorite = self.assetIsFavorite
+        }, completionHandler: nil)
+        
+        checkIfAssetIsFavorite()
+    }
+    
+    @IBAction func isAssetFavorite(_ sender: UIBarButtonItem) {
+        print(self.asset.isFavorite)
     }
     
     // MARK:- Set Title and Subtitle
@@ -91,12 +131,22 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         })
         
 //        self.navigationItem.title = asset.creationDate.
-        guard let date: Date = asset.creationDate else { return }
+        guard let date: Date = self.asset.creationDate else {
+            fatalError("Date not available")
+        }
         let dateString: String = self.dateFormatter.string(from: date)
         let timeString: String = self.timeFormatter.string(from: date)
         
 //        self.navigationItem.title = dateString
         self.navigationItem.titleView = setTitle(title: dateString, subtitle: timeString)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.assetIsFavorite = self.asset.isFavorite
+        
+        checkIfAssetIsFavorite()
     }
     
 

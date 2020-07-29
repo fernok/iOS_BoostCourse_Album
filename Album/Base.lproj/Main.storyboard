@@ -114,21 +114,21 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gt3-8l-YN5">
-                                    <size key="itemSize" width="189" height="177"/>
+                                    <size key="itemSize" width="136" height="135"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="singleImageCell" id="gai-ZO-nq5" customClass="ImageCollectionViewCell" customModule="Album" customModuleProvider="target">
-                                        <rect key="frame" x="93" y="0.0" width="189" height="177"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="136" height="135"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dJM-8A-RGx">
-                                            <rect key="frame" x="0.0" y="0.0" width="189" height="177"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="135"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XZN-hK-Jxp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="189" height="177"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="135"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="XZN-hK-Jxp" secondAttribute="height" multiplier="1:1" id="OVk-Ay-Q2a"/>
                                                     </constraints>
@@ -141,7 +141,7 @@
                                                 <constraint firstItem="XZN-hK-Jxp" firstAttribute="leading" secondItem="dJM-8A-RGx" secondAttribute="leading" id="Sh7-6b-GEi"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="189" height="177"/>
+                                        <size key="customSize" width="136" height="135"/>
                                         <connections>
                                             <outlet property="imageView" destination="XZN-hK-Jxp" id="pzK-Eo-8i1"/>
                                             <segue destination="OCR-K7-g51" kind="show" id="mD9-qf-2X3"/>
@@ -256,7 +256,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="hQu-hW-451"/>
-                                    <barButtonItem title="Item" id="cjy-t6-fgH"/>
+                                    <barButtonItem title="Item" image="heart" catalog="system" id="cjy-t6-fgH">
+                                        <connections>
+                                            <action selector="touchUpFavoriteButton:" destination="OCR-K7-g51" id="sHd-Ss-zDL"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="Xgo-Dz-BcD"/>
                                     <barButtonItem title="Item" systemItem="trash" id="sO4-ez-rYA">
                                         <connections>
@@ -278,11 +282,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wmb-5L-oae"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j7L-wq-8xS"/>
+                    <navigationItem key="navigationItem" id="j7L-wq-8xS">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="gPk-hU-Bfx">
+                            <connections>
+                                <action selector="isAssetFavorite:" destination="OCR-K7-g51" id="SYa-Fi-Mbd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="FKM-0j-7Qw" id="vph-ep-hdR"/>
                         <outlet property="likeButton" destination="cjy-t6-fgH" id="k5v-vn-DZA"/>
                         <outlet property="shareButton" destination="0ds-Yr-Q8C" id="Fca-CK-BUx"/>
+                        <outlet property="tempButton" destination="gPk-hU-Bfx" id="lrL-XC-6Cd"/>
+                        <outlet property="toolBar" destination="ZQI-Ey-3BU" id="EZX-eC-1M2"/>
                         <outlet property="trashButton" destination="sO4-ez-rYA" id="tdZ-U8-q59"/>
                     </connections>
                 </viewController>
@@ -548,4 +560,7 @@
             <point key="canvasLocation" x="138" y="-526"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
 </document>
