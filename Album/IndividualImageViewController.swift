@@ -10,7 +10,6 @@ import UIKit
 import Photos
 
 class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
-    @IBOutlet weak var tempButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var shareButton: UIBarButtonItem!
@@ -32,20 +31,6 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView
-    }
-    
-    func toggleFavoriteForAsset(asset: PHAsset!) {
-        PHPhotoLibrary.shared().performChanges({
-            let request = PHAssetChangeRequest(for: asset)
-            if asset.isFavorite {
-                request.isFavorite = false
-            }
-            else {
-                request.isFavorite = true
-            }
-//            request.isFavorite = !asset.isFavorite
-//            request.isFavorite = asset.isFavorite ? false : true
-        }, completionHandler: nil)
     }
     
     func checkIfAssetIsFavorite() {
@@ -76,10 +61,6 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         }, completionHandler: nil)
         
         checkIfAssetIsFavorite()
-    }
-    
-    @IBAction func isAssetFavorite(_ sender: UIBarButtonItem) {
-        print(self.asset.isFavorite)
     }
     
     // MARK:- Set Title and Subtitle
@@ -121,8 +102,6 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
         imageManager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: nil, resultHandler: {
             image, _ in
             OperationQueue.main.addOperation {
@@ -130,14 +109,12 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
             }
         })
         
-//        self.navigationItem.title = asset.creationDate.
         guard let date: Date = self.asset.creationDate else {
             fatalError("Date not available")
         }
         let dateString: String = self.dateFormatter.string(from: date)
         let timeString: String = self.timeFormatter.string(from: date)
         
-//        self.navigationItem.title = dateString
         self.navigationItem.titleView = setTitle(title: dateString, subtitle: timeString)
     }
     
@@ -148,16 +125,4 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         
         checkIfAssetIsFavorite()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

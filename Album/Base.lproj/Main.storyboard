@@ -282,18 +282,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wmb-5L-oae"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j7L-wq-8xS">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="gPk-hU-Bfx">
-                            <connections>
-                                <action selector="isAssetFavorite:" destination="OCR-K7-g51" id="SYa-Fi-Mbd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="j7L-wq-8xS"/>
                     <connections>
                         <outlet property="imageView" destination="FKM-0j-7Qw" id="vph-ep-hdR"/>
                         <outlet property="likeButton" destination="cjy-t6-fgH" id="k5v-vn-DZA"/>
                         <outlet property="shareButton" destination="0ds-Yr-Q8C" id="Fca-CK-BUx"/>
-                        <outlet property="tempButton" destination="gPk-hU-Bfx" id="lrL-XC-6Cd"/>
                         <outlet property="toolBar" destination="ZQI-Ey-3BU" id="EZX-eC-1M2"/>
                         <outlet property="trashButton" destination="sO4-ez-rYA" id="tdZ-U8-q59"/>
                     </connections>
