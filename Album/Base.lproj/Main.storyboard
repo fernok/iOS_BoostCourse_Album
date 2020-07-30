@@ -34,22 +34,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fpv-2E-VP0">
-                                                    <rect key="frame" x="3" y="3" width="173" height="179"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="179" height="179"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JNp-oQ-OBi">
-                                                    <rect key="frame" x="3" y="185" width="173" height="39"/>
+                                                    <rect key="frame" x="0.0" y="181" width="179" height="46"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-fk-OuM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="173" height="18.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-fk-OuM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="179" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5J-6c-sOr">
-                                                            <rect key="frame" x="0.0" y="18.5" width="173" height="20.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20.5" id="c7M-P2-B2R"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="0.0" y="28" width="179" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -58,15 +55,14 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="JNp-oQ-OBi" firstAttribute="top" secondItem="fpv-2E-VP0" secondAttribute="bottom" constant="3" id="0AQ-jN-Mj8"/>
-                                                <constraint firstItem="fpv-2E-VP0" firstAttribute="leading" secondItem="YHw-eD-cka" secondAttribute="leading" constant="3" id="17G-hc-Ge5"/>
-                                                <constraint firstAttribute="trailing" secondItem="JNp-oQ-OBi" secondAttribute="trailing" constant="3" id="3em-ws-Lfm"/>
-                                                <constraint firstItem="fpv-2E-VP0" firstAttribute="top" secondItem="YHw-eD-cka" secondAttribute="top" constant="3" id="H5P-4W-4VG"/>
-                                                <constraint firstAttribute="bottom" secondItem="fpv-2E-VP0" secondAttribute="bottom" constant="50" id="Kcc-wu-0wJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="fpv-2E-VP0" secondAttribute="trailing" constant="3" id="Rx2-kk-0SJ"/>
+                                                <constraint firstItem="fpv-2E-VP0" firstAttribute="leading" secondItem="YHw-eD-cka" secondAttribute="leading" id="2T4-91-gZd"/>
+                                                <constraint firstAttribute="bottom" secondItem="JNp-oQ-OBi" secondAttribute="bottom" id="QGY-wz-jIi"/>
+                                                <constraint firstItem="fpv-2E-VP0" firstAttribute="top" secondItem="YHw-eD-cka" secondAttribute="top" id="Qy7-Nd-UNa"/>
+                                                <constraint firstAttribute="trailing" secondItem="JNp-oQ-OBi" secondAttribute="trailing" id="bTU-fl-jd9"/>
+                                                <constraint firstItem="JNp-oQ-OBi" firstAttribute="leading" secondItem="YHw-eD-cka" secondAttribute="leading" id="ec8-n8-Ps9"/>
                                                 <constraint firstAttribute="width" secondItem="fpv-2E-VP0" secondAttribute="height" multiplier="1:1" id="mL7-M7-gFf"/>
-                                                <constraint firstAttribute="bottom" secondItem="JNp-oQ-OBi" secondAttribute="bottom" constant="3" id="raM-Hs-VTQ"/>
-                                                <constraint firstItem="JNp-oQ-OBi" firstAttribute="leading" secondItem="YHw-eD-cka" secondAttribute="leading" constant="3" id="wo7-dI-htk"/>
+                                                <constraint firstItem="JNp-oQ-OBi" firstAttribute="top" secondItem="fpv-2E-VP0" secondAttribute="bottom" constant="2" id="mWI-Ky-GdY"/>
+                                                <constraint firstAttribute="trailing" secondItem="fpv-2E-VP0" secondAttribute="trailing" id="nSy-EV-Tn6"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="179" height="227"/>
@@ -144,7 +140,6 @@
                                         <size key="customSize" width="136" height="135"/>
                                         <connections>
                                             <outlet property="imageView" destination="XZN-hK-Jxp" id="pzK-Eo-8i1"/>
-                                            <segue destination="OCR-K7-g51" kind="show" id="mD9-qf-2X3"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -209,6 +204,7 @@
                         <outlet property="selectButtonItem" destination="Pex-9B-hhh" id="ZCe-Cc-oxw"/>
                         <outlet property="shareButtonItem" destination="mIj-La-Ftm" id="ZLS-v4-7QT"/>
                         <outlet property="trashButtonItem" destination="SW8-S5-S5i" id="Yh4-pz-IKE"/>
+                        <segue destination="OCR-K7-g51" kind="show" identifier="IndividualImageView" id="xcE-4Z-1zf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eud-VT-Klb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

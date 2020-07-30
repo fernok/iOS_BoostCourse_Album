@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
+class IndividualImageViewController: UIViewController, UIScrollViewDelegate, PHPhotoLibraryChangeObserver {
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var shareButton: UIBarButtonItem!
@@ -33,13 +33,17 @@ class IndividualImageViewController: UIViewController, UIScrollViewDelegate {
         return self.imageView
     }
     
-    func checkIfAssetIsFavorite() {
+    @objc func checkIfAssetIsFavorite() {
         if self.assetIsFavorite {
             self.likeButton.image = UIImage(systemName: "heart.fill")
         }
         else {
             self.likeButton.image = UIImage(systemName: "heart")
         }
+    }
+    
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        print("changed")
     }
     
     // MARK:- Touch Up Methods

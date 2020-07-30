@@ -24,4 +24,11 @@ class AlbumCollectionViewCell: UICollectionViewCell {
 
 class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
+    
+    override var isSelected: Bool {
+        didSet {
+            self.contentView.backgroundColor = isSelected ? UIColor.black : UIColor.white
+            self.imageView.alpha = isSelected ? 0.75 : 1.0
+        }
+    }
 }

@@ -19,8 +19,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     var assetCollection: PHAssetCollection!
     var fetchResult: PHFetchResult<PHAsset>!
     var selectedAssets: [PHAsset] = []
-    var selectedCells: NSMutableArray = []
-    var isCellsSelectable: Bool = false
+    var isCellsSelectable: Bool!
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     let cellIdentifier: String = "singleImageCell"
     let halfWidth: CGFloat = UIScreen.main.bounds.width / 2.0
@@ -45,14 +44,36 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell: ImageCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else {
-            fatalError("Wrong class cell dequeued")
+        let cell = collectionView.cellForItem(at: indexPath)
+        if isCellsSelectable {
+            self.selectedAssets.append(fetchResult.object(at: indexPath.item))
+            
+            self.shareButtonItem.isEnabled = true
+            self.trashButtonItem.isEnabled = true
+            
+            self.navigationItem.title = String(self.selectedAssets.count) + "개 항목 선택됨"
+            
+            cell?.contentView.backgroundColor = UIColor.black
         }
-        
+        else {
+            performSegue(withIdentifier: "IndividualImageView", sender: cell)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //
+        if isCellsSelectable {
+            self.selectedAssets = self.selectedAssets.filter{ $0 != fetchResult.object(at: indexPath.item) }
+            
+            if self.selectedAssets.count == 0 {
+                self.shareButtonItem.isEnabled = false
+                self.trashButtonItem.isEnabled = false
+                
+                self.navigationItem.title = "항목 선택"
+            }
+            else {
+                self.navigationItem.title = String(self.selectedAssets.count) + "개 항목 선택됨"
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -62,7 +83,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -107,18 +128,29 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         // select button pressed
         if !isCellsSelectable {
             self.navigationItem.title = "항목 선택"
+            
+            self.collectionView.allowsMultipleSelection = true
+            
+            self.orderButtonItem.isEnabled = false
             self.shareButtonItem.isEnabled = false
             self.trashButtonItem.isEnabled = false
             self.selectButtonItem.title = "취소"
+            
             isCellsSelectable = true
         }
         // cancel button pressed
         else {
             self.navigationItem.title = self.assetCollection.localizedTitle
+            
+            self.collectionView.allowsMultipleSelection = false
+            
+            self.orderButtonItem.isEnabled = true
             self.shareButtonItem.isEnabled = false
             self.trashButtonItem.isEnabled = false
             self.selectButtonItem.title = "선택"
-            self.selectedCells.removeAllObjects()
+            
+            self.selectedAssets.removeAll()
+            
             isCellsSelectable = false
         }
     }
@@ -129,6 +161,8 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
         deleteImage(viewController: self, assetSet: selectedAssets)
+        
+        self.collectionView.reloadData()
     }
 
     // MARK:- Override Functions
@@ -151,6 +185,8 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
 //        self.collectionView.collectionViewLayout = flowLayout
         
         self.collectionView.reloadData()
+        
+        self.isCellsSelectable = false
 
         // Do any additional setup after loading the view.
     }
@@ -163,30 +199,25 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         }
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let nextViewController: IndividualImageViewController = segue.destination as? IndividualImageViewController else {
-            return
-        }
         
-        guard let cell: UICollectionViewCell = sender as? UICollectionViewCell else {
-            return
-        }
-        
-        guard let index: IndexPath = self.collectionView.indexPath(for: cell) else {
-            return
-        }
-        
-        nextViewController.asset = self.fetchResult[index.item]
-        
+        if segue.identifier == "IndividualImageView" {
+            guard let nextViewController: IndividualImageViewController = segue.destination as? IndividualImageViewController else {
+                return
+            }
+            
+            guard let cell: UICollectionViewCell = sender as? UICollectionViewCell else {
+                return
+            }
+            
+            guard let index: IndexPath = self.collectionView.indexPath(for: cell) else {
+                return
+            }
+            
+            nextViewController.asset = self.fetchResult[index.item]
+        }        
     }
 
 }

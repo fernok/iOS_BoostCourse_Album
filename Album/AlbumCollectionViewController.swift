@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class AlbumCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PHPhotoLibraryChangeObserver {
+class AlbumCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var albumFetchResult: PHFetchResult<PHAssetCollection>!
@@ -38,7 +38,6 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         return cell
     }
-    
     
     // MARK:- Photos Methods
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -102,16 +101,14 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumLineSpacing = 5
+        flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
-        
+
         flowLayout.estimatedItemSize = CGSize(width: halfWidth, height: halfWidth)
-        
+
         self.collectionView.collectionViewLayout = flowLayout
         
         self.collectionView.reloadData()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,17 +119,7 @@ class AlbumCollectionViewController: UIViewController, UICollectionViewDataSourc
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+    // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let nextViewController: ImageCollectionViewController = segue.destination as? ImageCollectionViewController else {
             return
